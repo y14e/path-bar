@@ -1,0 +1,57 @@
+{
+  "name": "@y14e/path-bar",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepublishOnly": "npm run build",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "a11y",
+    "accessibility",
+    "pathbar",
+    "component",
+    "typescript",
+    "utility"
+  ],
+  "author": "Yusuke Kamiyamane",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/y14e/path-bar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/y14e/path-bar/issues"
+  },
+  "homepage": "https://github.com/y14e/path-bar#readme",
+  "devDependencies": {
+    "@floating-ui/dom": "^1.7.6",
+    "@y14e/attributes-utils": "^1.1.1",
+    "@y14e/menu": "^1.7.0",
+    "@y14e/roving-tabindex": "^2.2.0",
+    "bun-types": "latest",
+    "power-focusable": "^4.3.2",
+    "tsup": "^8.0.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
