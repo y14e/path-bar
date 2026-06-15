@@ -3,7 +3,7 @@
  * Breadcrumb-style path bar implementation in TypeScript.
  * Supports keyboard navigation, integrated menus, and seamless menu traversal.
  *
- * @version 1.0.2
+ * @version 1.0.3
  * @author Yusuke Kamiyamane
  * @license MIT
  * @copyright Copyright (c) Yusuke Kamiyamane
