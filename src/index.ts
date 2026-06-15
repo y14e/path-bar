@@ -1,13 +1,13 @@
 /**
- * Path Bar
+ * Path
  * Breadcrumb-style path bar implementation in TypeScript.
  * Supports keyboard navigation, integrated menus, and seamless menu traversal.
  *
- * @version 1.0.3
+ * @version 1.0.4
  * @author Yusuke Kamiyamane
  * @license MIT
  * @copyright Copyright (c) Yusuke Kamiyamane
- * @see {@link https://github.com/y14e/path-bar}
+ * @see {@link https://github.com/y14e/path}
  */
 
 // -----------------------------------------------------------------------------
@@ -23,12 +23,12 @@ import { getNextFocusable } from 'power-focusable';
 // Types
 // -----------------------------------------------------------------------------
 
-export interface PathBarOptions {
+export interface PathOptions {
   readonly animation?: {
     readonly duration?: number;
   };
   readonly delay?: number;
-  readonly popover?: PathBarPopoverOptions;
+  readonly popover?: PathPopoverOptions;
   readonly selector?: {
     readonly item?: string;
     readonly list?: string;
@@ -40,7 +40,7 @@ export interface PathBarOptions {
   };
 }
 
-export interface PathBarPopoverOptions {
+export interface PathPopoverOptions {
   readonly arrow?: boolean;
   readonly middleware?: Middleware[];
   readonly placement?: Placement | string;
@@ -63,8 +63,8 @@ type DeepRequired<T> = T extends (...args: unknown[]) => unknown
 // APIs
 // -----------------------------------------------------------------------------
 
-export default class PathBar {
-  static defaults: PathBarOptions = {};
+export default class Path {
+  static defaults: PathOptions = {};
 
   #rootElement!: HTMLElement;
   #defaults = {
@@ -85,7 +85,7 @@ export default class PathBar {
       },
     },
   };
-  #settings!: DeepRequired<PathBarOptions>;
+  #settings!: DeepRequired<PathOptions>;
   #listElement!: HTMLElement | null;
   #itemElements!: HTMLElement[];
   #linkElements!: HTMLElement[];
@@ -96,18 +96,18 @@ export default class PathBar {
   #menus: Menu[] = [];
   #isDestroyed = false;
 
-  constructor(root: HTMLElement, options: PathBarOptions = {}) {
+  constructor(root: HTMLElement, options: PathOptions = {}) {
     if (!(root instanceof HTMLElement)) {
       throw new TypeError('Invalid root element');
     }
 
-    if (root.hasAttribute('data-path-bar-initialized')) {
+    if (root.hasAttribute('data-path-initialized')) {
       console.warn('Already initialized');
       return;
     }
 
     this.#rootElement = root;
-    this.#defaults = this.#mergeOptions(this.#defaults, PathBar.defaults);
+    this.#defaults = this.#mergeOptions(this.#defaults, Path.defaults);
     this.#settings = this.#mergeOptions(this.#defaults, options);
     matchMedia('(prefers-reduced-motion: reduce)').matches &&
       Object.assign(this.#settings.animation, { duration: 0 });
@@ -167,7 +167,7 @@ export default class PathBar {
 
     this.#listElement = null;
     this.#itemElements.length = 0;
-    this.#rootElement.removeAttribute('data-path-bar-initialized');
+    this.#rootElement.removeAttribute('data-path-initialized');
   }
 
   #initialize() {
@@ -218,7 +218,7 @@ export default class PathBar {
       wrap: true,
     });
 
-    this.#rootElement.setAttribute('data-path-bar-initialized', '');
+    this.#rootElement.setAttribute('data-path-initialized', '');
   }
 
   #onFocusIn = (event: FocusEvent): void => {
@@ -302,9 +302,9 @@ export default class PathBar {
   }
 
   #mergeOptions(
-    target: DeepRequired<PathBarOptions>,
-    source: PathBarOptions,
-  ): DeepRequired<PathBarOptions> {
+    target: DeepRequired<PathOptions>,
+    source: PathOptions,
+  ): DeepRequired<PathOptions> {
     return {
       ...target,
       ...source,

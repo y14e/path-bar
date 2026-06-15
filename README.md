@@ -5,42 +5,42 @@ Breadcrumb-style path bar implementation in TypeScript. Supports keyboard naviga
 ## Install
 
 ```bash
-npm i @y14e/path-bar
+npm i @y14e/path
 ```
 
 ```ts
 // npm
-import PathBar from '@y14e/path-bar@1.0.3';
+import Path from '@y14e/path@1.0.3';
 // with middleware
-import PathBar, { flip, offset, shift } from '@y14e/path-bar@1.0.3';
+import Path, { flip, offset, shift } from '@y14e/path@1.0.3';
 
 // CDNs
-import PathBar from 'https://esm.sh/@y14e/path-bar@1.0.3';
+import Path from 'https://esm.sh/@y14e/path@1.0.3';
 // or
-import PathBar from 'https://cdn.jsdelivr.net/npm/@y14e/path-bar@1.0.3/+esm';
+import Path from 'https://cdn.jsdelivr.net/npm/@y14e/path@1.0.3/+esm';
 // or
-import PathBar from 'https://esm.unpkg.com/@y14e/path-bar@1.0.3';
+import Path from 'https://esm.unpkg.com/@y14e/path@1.0.3';
 ```
 
 ## Usage
 
 ```ts
-new PathBar(root, options);
-// => PathBar
+new Path(root, options);
+// => Path
 //
 // root: HTMLElement
-// options (optional): PathBarOptions
+// options (optional): PathOptions
 
 ```
 
 ## 🪄 Options
 
 ```ts
-interface PathBarOptions {
+interface PathOptions {
   // Work in progress
 }
 
-interface PathBarPopoverOptions {
+interface PathPopoverOptions {
   arrow?: boolean;           // default: true
   middleware?: Middleware[]; // default: [flip(), offset(), shift()]
   placement?: Placement;     // default: 'bottom-start'
@@ -52,19 +52,19 @@ interface PathBarPopoverOptions {
 
 ### ⚙️ Customize defaults
 
-Override the global default settings applied to all path bar instances.
+Override the global default settings applied to all path instances.
 
 ```ts
-import PathBar from '@y14e/path-bar';
+import Path from '@y14e/path';
 
-PathBar.defaults = {
+Path.defaults = {
   delay: 500,
   selector: {
     list: 'ul',
   },
 };
 
-new PathBar(root);
+new Path(root);
 ```
 
 ## 📦 APIs
@@ -74,7 +74,7 @@ new PathBar(root);
 Destroys the instance and cleans up all event listeners and menus.
 
 ```ts
-pathBar.destroy(force);
+Path.destroy(force);
 // => Promise<void>
 //
 // force (optional): If true, skips waiting for animations to finish.
@@ -82,7 +82,7 @@ pathBar.destroy(force);
 
 ## Demo
 
-https://y14e.github.io/path-bar/
+https://y14e.github.io/path/
 
 ## Credits
 

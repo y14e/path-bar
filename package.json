@@ -1,6 +1,6 @@
 {
-  "name": "@y14e/path-bar",
-  "version": "1.0.3",
+  "name": "@y14e/path",
+  "version": "1.0.4",
   "description": "",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -35,12 +35,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/y14e/path-bar.git"
+    "url": "git+https://github.com/y14e/path.git"
   },
   "bugs": {
-    "url": "https://github.com/y14e/path-bar/issues"
+    "url": "https://github.com/y14e/path/issues"
   },
-  "homepage": "https://github.com/y14e/path-bar#readme",
+  "homepage": "https://github.com/y14e/path#readme",
   "devDependencies": {
     "@floating-ui/dom": "^1.7.6",
     "@y14e/attributes-utils": "^1.1.1",
