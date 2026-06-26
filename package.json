@@ -1,6 +1,6 @@
 {
   "name": "@y14e/path",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@y14e/attributes-utils": "^1.1.2",
-    "@y14e/menu": "^3.4.1",
+    "@y14e/menu": "^3.4.2",
     "@y14e/roving-tabindex": "^3.0.14",
     "power-focusable": "^4.3.4"
   }
