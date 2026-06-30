@@ -3,7 +3,7 @@
  * Breadcrumb-style path bar implementation in TypeScript.
  * Supports keyboard navigation, integrated menus, and seamless menu traversal.
  *
- * @version 1.1.2
+ * @version 1.1.3
  * @author Yusuke Kamiyamane
  * @license MIT
  * @copyright Copyright (c) Yusuke Kamiyamane
@@ -200,8 +200,8 @@ export default class Path {
         {
           animation,
           delay,
-          onBlurWithin: (menu, next) => {
-            this.#onFocusOut(menu, next);
+          onBlurWithin: (menu, next, wasOpen) => {
+            this.#onFocusOut(menu, next, wasOpen);
           },
           onClose: (_, reason) => {
             this.#onClose(reason);
@@ -220,6 +220,7 @@ export default class Path {
 
     this.#cleanupRovingTabIndex = createRovingTabIndex(this.#listElement, {
       direction: 'horizontal',
+      // navigationOnly: true,
       noMemory: true,
       selector: `${this.#settings.selector.list} > * > a`,
       wrap: true,
@@ -229,6 +230,7 @@ export default class Path {
   }
 
   #onClose = (reason: MenuCloseReason): void => {
+    // if (reason && reason !== 'tab' && reason !== 'shift-tab') {
     if (reason) {
       this.#autoOpen = false;
     }
@@ -240,8 +242,10 @@ export default class Path {
     }
   };
 
-  #onFocusOut = (menu: Menu, next: HTMLElement | null): void => {
+  #onFocusOut = (menu: Menu, next: HTMLElement | null, wasOpen: boolean): void => {
     if (menu.isOpen()) {
+      this.#autoOpen = true;
+    } else if (wasOpen) {
       this.#autoOpen = true;
     }
 
@@ -295,8 +299,8 @@ export default class Path {
         ...target.popover,
         ...(source.popover ?? {}),
         middleware: Object.assign(
-          [...(target.popover?.middleware ?? [])],
-          [...(source.popover?.middleware ?? [])],
+          target.popover?.middleware,
+          source.popover?.middleware,
         ),
       },
       selector: {
